@@ -1,4 +1,4 @@
-FROM alpine:3.22 as builder
+FROM alpine:3.22 AS builder
 
 # Download the OpenTofu binary with the specified version parameter
 ARG TOFU_VERSION
