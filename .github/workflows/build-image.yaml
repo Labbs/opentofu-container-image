@@ -14,7 +14,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: ${{ github.repository }}
+  IMAGE: labbs/opentofu-container-image
 
 jobs:
   build:
@@ -38,4 +38,4 @@ jobs:
           file: ./Dockerfile
           push: true
           build-args: TOFU_VERSION=${{ github.event.inputs.version }}
-          tags: ${{ env.IMAGE }}:${{ github.event.inputs.version }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ github.event.inputs.version }}
