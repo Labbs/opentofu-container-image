@@ -15,13 +15,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download opentofu binaries
-        run: |
-          mkdir -p /tmp/opentofu
-          curl -L -o /tmp/opentofu/opentofu.zip https://github.com/opentofu/opentofu/releases/download/v${{ env.test_version}}/tofu_${{ env.test_version}}_linux_amd64.zip
-          unzip /tmp/opentofu/opentofu.zip -d /tmp/opentofu
-          ls -lah /tmp/opentofu
+      # - name: Download opentofu binaries
+      #   run: |
+      #     mkdir -p /tmp/opentofu
+      #     curl -L -o /tmp/opentofu/opentofu.zip https://github.com/opentofu/opentofu/releases/download/v${{ env.test_version}}/tofu_${{ env.test_version}}_linux_amd64.zip
+      #     unzip /tmp/opentofu/opentofu.zip -d /tmp/opentofu
+      #     ls -lah /tmp/opentofu
 
       - name: Build Docker image
         run: |
-          docker build -t opentofu:pr-test .
+          docker build -t opentofu:pr-test . --build-arg TOFU_VERSION=${{ env.test_version }}
