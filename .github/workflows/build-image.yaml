@@ -36,5 +36,6 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          push: true
           build-args: TOFU_VERSION=${{ github.event.inputs.version }}
           tags: ${{ env.IMAGE }}:${{ github.event.inputs.version }}
