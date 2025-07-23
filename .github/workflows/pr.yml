@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  test_version: 1.10.3
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,7 +17,7 @@ jobs:
 
       - name: Download opentofu binaries
         run: |
-          curl -L -o opentofu.zip https://github.com/opentofu/opentofu/releases/download/v${{ github.event.inputs.version }}/opentofu_${{ github.event.inputs.version }}_linux_amd64.zip
+          curl -L -o opentofu.zip https://github.com/opentofu/opentofu/releases/download/v${{ env.test_version }}/opentofu_${{ env.test_version }}_linux_amd64.zip
           unzip opentofu.zip
           ls -lah
 
