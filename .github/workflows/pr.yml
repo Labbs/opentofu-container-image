@@ -1,0 +1,20 @@
+name: Pull Request test build image
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  test_version: 1.10.3
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t opentofu:pr-test . --build-arg TOFU_VERSION=${{ env.test_version }}
