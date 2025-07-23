@@ -12,5 +12,3 @@ FROM alpine:3.22
 RUN apk add --no-cache git bash openssh
 
 COPY --from=builder tofu /usr/local/bin/tofu
-
-ENTRYPOINT ["/usr/local/bin/tofu"]
