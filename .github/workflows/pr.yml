@@ -17,7 +17,7 @@ jobs:
 
       - name: Download opentofu binaries
         run: |
-          curl -L -o opentofu.zip https://github.com/opentofu/opentofu/releases/download/v${{ env.test_version }}/opentofu_${{ env.test_version }}_linux_amd64.zip
+          curl -L -o opentofu.zip https://github.com/opentofu/opentofu/releases/download/v${{ env.test_version}}/tofu_${{ env.test_version}}_linux_amd64.zip
           unzip opentofu.zip
           ls -lah
 
