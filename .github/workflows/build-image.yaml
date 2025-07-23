@@ -37,4 +37,4 @@ jobs:
           context: .
           file: ./Dockerfile
           build-args: TOFU_VERSION=${{ github.event.inputs.version }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ github.event.inputs.version }}
+          tags: ${{ env.IMAGE }}:${{ github.event.inputs.version }}
