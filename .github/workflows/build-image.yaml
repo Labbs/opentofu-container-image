@@ -23,17 +23,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download opentofu binaries
-        run: |
-          mkdir -p /tmp/opentofu
-          curl -L -o /tmp/opentofu/opentofu.zip https://github.com/opentofu/opentofu/releases/download/v${{ github.event.inputs.version }}/opentofu_${{ github.event.inputs.version }}_linux_amd64.zip
-          unzip /tmp/opentofu/opentofu.zip -d /tmp/opentofu
-
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ github.event.inputs.version }}
+      # - name: Docker meta
+      #   id: meta
+      #   uses: docker/metadata-action@v5
+      #   with:
+      #     images: ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ github.event.inputs.version }}
 
 
       - name: Log in to GitHub Container Registry
@@ -45,10 +39,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          build-args: TOFU_VERSION=${{ github.event.inputs.version }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ github.event.inputs.version }}
